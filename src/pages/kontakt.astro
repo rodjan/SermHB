@@ -1,0 +1,45 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const entry = await getEntry('stranky', 'kontakt');
+const Content = entry ? (await render(entry)).Content : null;
+---
+<Base title="Kontakt" description="Kontaktní údaje šermířského oddílu ŠERM Havlíčkův Brod.">
+  <section class="page-head">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Úvod</a> / Kontakt</div>
+      <h1>Kontakt</h1>
+      <p>Ozvěte se nám – rádi zodpovíme vaše dotazy.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container kontakt-grid">
+      <div class="prose">
+        {Content ? <Content /> : (
+          <>
+            <h2>ŠERM Havlíčkův Brod, z.s.</h2>
+            <p><strong>E-mail:</strong> <a href="mailto:info@serm-havlickuv-brod.cz">info@serm-havlickuv-brod.cz</a></p>
+            <p><strong>Telefon:</strong> +420 000 000 000</p>
+            <p><strong>Tréninky:</strong> tělocvična, Havlíčkův Brod</p>
+          </>
+        )}
+      </div>
+      <div class="map-wrap">
+        <iframe
+          title="Mapa – Havlíčkův Brod"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=15.56%2C49.59%2C15.61%2C49.62&layer=mapnik&marker=49.6076%2C15.5807"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .kontakt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+  .map-wrap { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .map-wrap iframe { width: 100%; height: 380px; border: 0; display: block; }
+  @media (max-width: 820px) { .kontakt-grid { grid-template-columns: 1fr; } }
+</style>

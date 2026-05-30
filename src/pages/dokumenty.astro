@@ -1,0 +1,77 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const dokumenty = (await getCollection('dokumenty')).sort((a, b) => a.data.order - b.data.order);
+
+// Seskupení podle kategorie
+const groups = new Map<string, typeof dokumenty>();
+for (const d of dokumenty) {
+  const k = d.data.kategorie || 'Ostatní';
+  if (!groups.has(k)) groups.set(k, []);
+  groups.get(k)!.push(d);
+}
+
+const prispevky = await getEntry('stranky', 'prispevky');
+const PrispevkyContent = prispevky ? (await render(prispevky)).Content : null;
+---
+<Base title="Dokumenty a příspěvky" description="Dokumenty ke stažení a informace o členských příspěvcích oddílu ŠERM Havlíčkův Brod.">
+  <section class="page-head">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Úvod</a> / Dokumenty a příspěvky</div>
+      <h1>Dokumenty a příspěvky</h1>
+      <p>Přihlášky, formuláře, rozpisy závodů a informace o členských příspěvcích.</p>
+    </div>
+  </section>
+
+  <!-- Členské příspěvky -->
+  <section class="section">
+    <div class="container prose">
+      <h2>Členské příspěvky</h2>
+      {PrispevkyContent ? <PrispevkyContent /> : <p>Informace o příspěvcích budou brzy doplněny.</p>}
+    </div>
+  </section>
+
+  <!-- Dokumenty ke stažení -->
+  <section class="section section--soft">
+    <div class="container">
+      <h2>Dokumenty ke stažení</h2>
+      {dokumenty.length > 0 ? (
+        [...groups.entries()].map(([kat, items]) => (
+          <div class="doc-group">
+            <h3>{kat}</h3>
+            <ul class="doc-list">
+              {items.map((d) => (
+                <li>
+                  <a href={d.data.file} class="doc-item" target="_blank" rel="noopener">
+                    <span class="doc-item__icon">📄</span>
+                    <span class="doc-item__name">{d.data.title}</span>
+                    <span class="doc-item__action">Otevřít / stáhnout ↓</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      ) : (
+        <p class="lead">Zatím tu nejsou žádné dokumenty ke stažení.</p>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .doc-group { margin-bottom: 1.8rem; }
+  .doc-group h3 { margin-bottom: 0.6rem; }
+  .doc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+  .doc-item {
+    display: flex; align-items: center; gap: 0.8rem; padding: 0.9rem 1.1rem;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: inherit;
+    transition: border-color 0.15s ease, transform 0.12s ease;
+  }
+  .doc-item:hover { border-color: var(--navy-500); transform: translateY(-1px); text-decoration: none; }
+  .doc-item__icon { font-size: 1.3rem; }
+  .doc-item__name { flex: 1; font-weight: 600; color: var(--navy); }
+  .doc-item__action { color: var(--navy-500); font-weight: 700; font-size: 0.9rem; }
+  @media (max-width: 520px) { .doc-item__action { display: none; } }
+</style>

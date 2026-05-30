@@ -1,0 +1,22 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const entry = await getEntry('stranky', 'treninky');
+const Content = entry ? (await render(entry)).Content : null;
+---
+<Base title="Tréninky" description="Rozpis a časy tréninků šermířského oddílu ŠERM Havlíčkův Brod.">
+  <section class="page-head">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Úvod</a> / Tréninky</div>
+      <h1>Rozpis tréninků</h1>
+      <p>Kdy a kde trénujeme. Časy se mohou v průběhu sezóny měnit.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      {Content ? <Content /> : <p>Rozpis tréninků zatím nebyl vyplněn.</p>}
+    </div>
+  </section>
+</Base>

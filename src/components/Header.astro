@@ -1,0 +1,76 @@
+---
+const nav = [
+  { href: '/', label: 'Úvod' },
+  { href: '/o-klubu', label: 'O klubu' },
+  { href: '/treninky', label: 'Tréninky' },
+  { href: '/treneri', label: 'Trenéři' },
+  { href: '/nabor', label: 'Nábor' },
+  { href: '/vysledky', label: 'Výsledky' },
+  { href: '/galerie', label: 'Fotogalerie' },
+  { href: '/dokumenty', label: 'Dokumenty' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="/" aria-label="ŠERM Havlíčkův Brod – domů">
+      <img src="/images/logo.svg" alt="ŠERM Havlíčkův Brod" width="190" height="50" />
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+    <label for="nav-toggle" class="nav-burger" aria-label="Otevřít menu">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav class="site-nav" aria-label="Hlavní navigace">
+      {nav.map((item) => {
+        const itemPath = item.href.replace(/\/$/, '') || '/';
+        const active = itemPath === '/' ? path === '/' : path.startsWith(itemPath);
+        return <a href={item.href} class={active ? 'active' : ''}>{item.label}</a>;
+      })}
+      <a href="/nabor" class="btn btn--gold nav-cta">Přihlásit dítě</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: saturate(150%) blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; min-height: 76px;
+  }
+  .brand img { height: 50px; width: auto; }
+  .site-nav { display: flex; align-items: center; gap: 0.25rem; flex-wrap: wrap; }
+  .site-nav a {
+    color: var(--navy); font-weight: 600; font-size: 0.95rem;
+    padding: 0.5rem 0.65rem; border-radius: 8px; text-decoration: none;
+  }
+  .site-nav a:hover { background: var(--bg-soft); }
+  .site-nav a.active { color: var(--navy-500); background: var(--bg-soft); }
+  .nav-cta { margin-left: 0.4rem; }
+  .nav-cta.active { background: var(--gold); }
+
+  .nav-toggle, .nav-burger { display: none; }
+  .nav-burger { width: 44px; height: 40px; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; }
+  .nav-burger span { display: block; height: 3px; background: var(--navy); border-radius: 3px; transition: 0.2s; }
+
+  @media (max-width: 1040px) {
+    .nav-burger { display: flex; }
+    .site-nav {
+      position: absolute; top: 76px; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: #fff; border-bottom: 1px solid var(--line);
+      padding: 0.5rem 1rem 1rem; box-shadow: var(--shadow);
+      display: none;
+    }
+    .nav-toggle:checked ~ .site-nav { display: flex; }
+    .site-nav a { padding: 0.8rem 0.6rem; border-radius: 8px; }
+    .nav-cta { margin: 0.5rem 0 0; text-align: center; justify-content: center; }
+  }
+</style>

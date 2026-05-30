@@ -1,0 +1,63 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div>
+      <img src="/images/logo-white.svg" alt="ŠERM Havlíčkův Brod" class="footer-logo" width="200" height="53" />
+      <p class="footer-about">
+        Šermířský oddíl pro děti i dospělé. Učíme sportovní šerm fleretem –
+        od úplných začátečníků až po závodníky.
+      </p>
+    </div>
+
+    <div>
+      <h4>Rychlé odkazy</h4>
+      <ul>
+        <li><a href="/o-klubu">O klubu</a></li>
+        <li><a href="/treninky">Rozpis tréninků</a></li>
+        <li><a href="/nabor">Nábor nových členů</a></li>
+        <li><a href="/dokumenty">Dokumenty a příspěvky</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Kontakt</h4>
+      <ul class="contact-list">
+        <li>📍 Ledečská 3028, Havlíčkův Brod</li>
+        <li>✉ <a href="mailto:info@serm-havlickuv-brod.cz">info@serm-havlickuv-brod.cz</a></li>
+        <li>📞 <a href="tel:+420564034723">564 034 723</a></li>
+      </ul>
+      <div class="socials">
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <div class="container">
+      <span>© {year} ŠERM Havlíčkův Brod, z.s. Všechna práva vyhrazena.</span>
+      <span><a href="/admin/">Administrace</a></span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--navy); color: rgba(255,255,255,0.82); margin-top: auto; }
+  .site-footer__grid {
+    display: grid; grid-template-columns: 1.4fr 1fr 1.2fr; gap: 2rem;
+    padding: 3rem 1.25rem 2.5rem;
+  }
+  .footer-logo { height: 50px; width: auto; margin-bottom: 1rem; }
+  .footer-about { color: rgba(255,255,255,0.7); max-width: 36ch; }
+  .site-footer h4 { color: #fff; font-size: 1rem; margin-bottom: 0.9rem; }
+  .site-footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .site-footer a { color: rgba(255,255,255,0.82); }
+  .site-footer a:hover { color: #fff; }
+  .socials { display: flex; gap: 1rem; margin-top: 1rem; }
+  .socials a { font-weight: 600; }
+  .site-footer__bottom { border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.85rem; }
+  .site-footer__bottom .container { display: flex; justify-content: space-between; padding-block: 1.1rem; gap: 1rem; flex-wrap: wrap; }
+  @media (max-width: 760px) { .site-footer__grid { grid-template-columns: 1fr; gap: 1.6rem; } }
+</style>

@@ -1,0 +1,160 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import NewsCard from '../components/NewsCard.astro';
+
+const aktuality = (await getCollection('aktuality'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+<Base>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <span class="hero__eyebrow">Šermířský oddíl · Havlíčkův Brod</span>
+        <h1>Objevte krásu <span class="hl">sportovního šermu</span></h1>
+        <p class="hero__lead">
+          Učíme děti i dospělé šerm fleretem – od prvních krůčků v tělocvičně
+          až po závody. Rozvíjíme obratnost, soustředění, sebevědomí
+          a fair play.
+        </p>
+        <div class="hero__actions">
+          <a href="/nabor" class="btn btn--gold">Přihlásit dítě na nábor</a>
+          <a href="/o-klubu" class="btn btn--ghost">Více o oddílu</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RYCHLÉ INFO -->
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3 quick">
+        <div class="quick__item">
+          <div class="quick__icon">🤺</div>
+          <h3>Pro každého</h3>
+          <p>Přijímáme začátečníky od cca 7 let i dospělé. Vybavení na první tréninky zapůjčíme.</p>
+        </div>
+        <div class="quick__item">
+          <div class="quick__icon">📅</div>
+          <h3>Pravidelné tréninky</h3>
+          <p>Trénujeme několikrát týdně v tělocvičně v Havlíčkově Brodě. <a href="/treninky">Zobrazit rozpis →</a></p>
+        </div>
+        <div class="quick__item">
+          <div class="quick__icon">🏅</div>
+          <h3>Závodní šerm</h3>
+          <p>Talentované šermíře připravujeme na turnaje po celé ČR. <a href="/vysledky">Naše výsledky →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O ODDÍLU -->
+  <section class="section section--soft">
+    <div class="container about-split">
+      <div class="about-split__media">
+        <img src="/images/logo.svg" alt="Znak oddílu ŠERM Havlíčkův Brod" />
+      </div>
+      <div class="about-split__text">
+        <span class="eyebrow">O nás</span>
+        <h2>Šerm v Havlíčkově Brodě od roku 1956</h2>
+        <p>
+          Jsme parta nadšenců, kterou spojuje láska k šermu. Náš oddíl má
+          v Havlíčkově Brodě dlouhou tradici a v přátelské atmosféře vede
+          děti i dospělé ke sportu, který kromě fyzické kondice rozvíjí
+          také rychlé rozhodování, taktiku a respekt k soupeři.
+        </p>
+        <p>
+          Začínáme u fleretu – základní šermířské zbraně, na které se
+          naučíte techniku, práci nohou i šermířské myšlení.
+        </p>
+        <a href="/o-klubu" class="btn btn--outline">Poznejte náš oddíl</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AKTUALITY -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head section-head--row">
+        <div>
+          <span class="eyebrow">Co je nového</span>
+          <h2>Aktuality z oddílu</h2>
+        </div>
+        <a href="/aktuality" class="btn btn--outline">Všechny aktuality</a>
+      </div>
+
+      {aktuality.length > 0 ? (
+        <div class="grid grid-3">
+          {aktuality.map((p) => (
+            <NewsCard
+              href={`/aktuality/${p.id}`}
+              title={p.data.title}
+              date={p.data.date}
+              perex={p.data.perex}
+              cover={p.data.cover}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="lead">Zatím tu nejsou žádné příspěvky. Brzy přidáme novinky!</p>
+      )}
+    </div>
+  </section>
+
+  <!-- CTA NÁBOR -->
+  <section class="cta">
+    <div class="container cta__inner">
+      <div>
+        <h2>Chcete to zkusit?</h2>
+        <p>Přijďte si nezávazně vyzkoušet trénink. Stačí sportovní oblečení a chuť učit se něco nového.</p>
+      </div>
+      <a href="/nabor" class="btn btn--gold">Jak se přihlásit</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    background:
+      linear-gradient(180deg, rgba(16,35,63,0.92), rgba(16,35,63,0.86)),
+      radial-gradient(120% 120% at 80% 0%, #21456f 0%, #10233f 60%);
+    color: #fff;
+  }
+  .hero__inner { padding: clamp(3.5rem, 9vw, 7rem) 0; }
+  .hero__content { max-width: 680px; }
+  .hero__eyebrow {
+    display: inline-block; letter-spacing: 0.16em; text-transform: uppercase;
+    font-size: 0.8rem; font-weight: 700; color: var(--gold); margin-bottom: 1rem;
+  }
+  .hero h1 { color: #fff; font-size: clamp(2.2rem, 5.5vw, 3.6rem); }
+  .hero h1 .hl { color: var(--gold); }
+  .hero__lead { font-size: 1.2rem; color: rgba(255,255,255,0.85); max-width: 56ch; }
+  .hero__actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.8rem; }
+
+  .quick__item { text-align: left; padding: 1.4rem; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+  .quick__icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .quick__item h3 { margin-bottom: 0.3rem; }
+  .quick__item p { color: var(--text-soft); margin: 0; }
+
+  .about-split { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 2.5rem; align-items: center; }
+  .about-split__media {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 2.5rem; box-shadow: var(--shadow); display: grid; place-items: center;
+  }
+  .about-split__media img { max-height: 160px; width: auto; }
+
+  .section-head--row { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; max-width: none; }
+
+  .cta { background: var(--gold); color: #21170a; }
+  .cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 2.5rem 1.25rem; flex-wrap: wrap; }
+  .cta h2 { color: #21170a; margin-bottom: 0.3rem; }
+  .cta p { margin: 0; max-width: 60ch; }
+
+  @media (max-width: 820px) {
+    .about-split { grid-template-columns: 1fr; }
+    .section-head--row { flex-direction: column; align-items: flex-start; }
+  }
+</style>

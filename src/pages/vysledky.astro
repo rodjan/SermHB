@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const vysledky = (await getCollection('vysledky'))
+  .filter((v) => !v.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d: Date) => new Intl.DateTimeFormat('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+---
+<Base title="Výsledky a závody" description="Výsledky šermířů oddílu ŠERM Havlíčkův Brod ze závodů a turnajů.">
+  <section class="page-head">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Úvod</a> / Výsledky</div>
+      <h1>Výsledky a závody</h1>
+      <p>Jak se našim šermířům daří na turnajích.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {vysledky.length > 0 ? (
+        <div class="results">
+          {vysledky.map((v) => (
+            <a class="result-row" href={`/vysledky/${v.id}`}>
+              {v.data.cover && <img class="result-row__img" src={v.data.cover} alt={v.data.title} loading="lazy" />}
+              <div class="result-row__main">
+                <div class="result-row__meta">
+                  <span class="badge">{v.data.zbran}</span>
+                  <span class="result-row__date">{fmt(v.data.date)}</span>
+                  {v.data.misto && <span class="result-row__place">· {v.data.misto}</span>}
+                </div>
+                <h3 class="result-row__title">{v.data.title}</h3>
+              </div>
+              <span class="result-row__arrow">→</span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="lead">Zatím tu nejsou žádné výsledky. Brzy doplníme!</p>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .results { display: flex; flex-direction: column; gap: 1rem; }
+  .result-row {
+    display: flex; align-items: center; gap: 1.2rem; padding: 1rem 1.2rem;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    text-decoration: none; color: inherit; box-shadow: var(--shadow); transition: transform 0.12s ease;
+  }
+  .result-row:hover { transform: translateY(-2px); text-decoration: none; }
+  .result-row__img { width: 96px; height: 72px; object-fit: cover; border-radius: var(--radius-sm); flex: none; }
+  .result-row__main { flex: 1; }
+  .result-row__meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; color: var(--steel); font-size: 0.86rem; font-weight: 600; }
+  .result-row__title { margin: 0.3rem 0 0; font-size: 1.15rem; }
+  .result-row__arrow { color: var(--navy-500); font-weight: 800; font-size: 1.2rem; }
+  @media (max-width: 560px) { .result-row__img { display: none; } }
+</style>

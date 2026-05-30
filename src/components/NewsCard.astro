@@ -1,0 +1,35 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  date: Date;
+  perex?: string;
+  cover?: string;
+  badge?: string;
+}
+const { href, title, date, perex, cover, badge } = Astro.props;
+const dateStr = new Intl.DateTimeFormat('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+---
+<a class="card news-card" href={href}>
+  {cover && (
+    <div class="card__media">
+      <img src={cover} alt={title} loading="lazy" />
+    </div>
+  )}
+  <div class="card__body">
+    <span class="card__date">
+      {badge && <span class="badge">{badge}</span>}
+      {dateStr}
+    </span>
+    <h3 class="card__title">{title}</h3>
+    {perex && <p class="card__perex">{perex}</p>}
+    <span class="news-card__more">Číst více →</span>
+  </div>
+</a>
+
+<style>
+  .news-card { text-decoration: none; color: inherit; }
+  .news-card:hover { text-decoration: none; }
+  .card__date { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .news-card__more { margin-top: auto; color: var(--navy-500); font-weight: 700; font-size: 0.9rem; padding-top: 0.4rem; }
+</style>

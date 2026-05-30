@@ -1,0 +1,19 @@
+# Konfigurace nasazení na Netlify.
+# Tato složka je připravena tak, aby se její OBSAH dal přesunout do
+# samostatného repozitáře (web v kořeni repozitáře). Proto jsou cesty
+# relativní ke kořeni a "base" se nenastavuje.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Bezpečnostní hlavičky
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

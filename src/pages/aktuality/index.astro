@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import NewsCard from '../../components/NewsCard.astro';
+
+const aktuality = (await getCollection('aktuality'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<Base title="Aktuality" description="Novinky a aktuality ze šermířského oddílu ŠERM Havlíčkův Brod.">
+  <section class="page-head">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Úvod</a> / Aktuality</div>
+      <h1>Aktuality</h1>
+      <p>Co se u nás v oddíle děje – novinky z tréninků, závodů a akcí.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {aktuality.length > 0 ? (
+        <div class="grid grid-3">
+          {aktuality.map((p) => (
+            <NewsCard
+              href={`/aktuality/${p.id}`}
+              title={p.data.title}
+              date={p.data.date}
+              perex={p.data.perex}
+              cover={p.data.cover}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="lead">Zatím tu nejsou žádné příspěvky.</p>
+      )}
+    </div>
+  </section>
+</Base>

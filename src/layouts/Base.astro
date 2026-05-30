@@ -1,0 +1,62 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description = 'Šermířský oddíl ŠERM Havlíčkův Brod – sportovní šerm fleretem pro děti i dospělé. Tréninky, nábor, výsledky a fotogalerie.',
+  image = '/images/logo.svg',
+} = Astro.props;
+
+const siteName = 'ŠERM Havlíčkův Brod';
+const fullTitle = title ? `${title} | ${siteName}` : `${siteName} – sportovní šerm`;
+const origin = Astro.site ?? new URL(Astro.url.origin);
+const canonical = new URL(Astro.url.pathname, origin).toString();
+---
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, origin).toString()} />
+    <meta property="og:locale" content="cs_CZ" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Aktuality – ŠERM Havlíčkův Brod" href="/rss.xml" />
+  </head>
+  <body>
+    <a href="#obsah" class="skip-link">Přeskočit na obsah</a>
+    <Header />
+    <main id="obsah">
+      <slot />
+    </main>
+    <Footer />
+
+    <style is:global>
+      body { display: flex; flex-direction: column; min-height: 100vh; }
+      main { flex: 1; }
+      .skip-link {
+        position: absolute; left: -999px; top: 0; z-index: 100;
+        background: var(--gold); color: #21170a; padding: 0.6rem 1rem; border-radius: 0 0 8px 0; font-weight: 700;
+      }
+      .skip-link:focus { left: 0; }
+    </style>
+  </body>
+</html>

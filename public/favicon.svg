@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ŠERM Havlíčkův Brod">
+  <title>ŠERM Havlíčkův Brod</title>
+  <rect width="64" height="64" rx="14" fill="#10233f" />
+  <g transform="translate(6,9) scale(0.2)" fill="none" stroke="#ffffff" stroke-width="14"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="M30 176 L112 96 L150 122 L150 176" />
+    <path d="M112 96 L126 56" />
+    <path d="M126 58 L176 62" />
+    <path d="M126 58 L104 32 L120 13" />
+    <path d="M188 60 L250 44" />
+  </g>
+  <circle cx="34.6" cy="17.4" r="4.4" fill="#ffffff" />
+  <circle cx="43" cy="21.2" r="2.2" fill="#ffffff" />
+</svg>
