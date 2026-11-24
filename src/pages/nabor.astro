@@ -4,6 +4,8 @@ import Base from '../layouts/Base.astro';
 
 const entry = await getEntry('stranky', 'nabor');
 const Content = entry ? (await render(entry)).Content : null;
+const prispevky = await getEntry('stranky', 'prispevky');
+const PrispevkyContent = prispevky ? (await render(prispevky)).Content : null;
 ---
 <Base title="Nábor" description="Nábor nových členů do šermířského oddílu ŠERM Havlíčkův Brod. Přijďte si vyzkoušet šerm.">
   <section class="page-head">
@@ -30,6 +32,13 @@ const Content = entry ? (await render(entry)).Content : null;
           <li>✔ Vhodné pro děti od ~7 let</li>
         </ul>
       </aside>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container prose">
+      <h2>Členské příspěvky</h2>
+      {PrispevkyContent ? <PrispevkyContent /> : <p>Informace o příspěvcích budou brzy doplněny.</p>}
     </div>
   </section>
 </Base>
