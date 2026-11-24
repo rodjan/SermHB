@@ -17,8 +17,8 @@ public_folder: "/uploads"
 locale: "cs"
 publish_mode: simple
 
-site_url: https://serm-havlickuv-brod.netlify.app
-display_url: https://serm-havlickuv-brod.netlify.app
+site_url: https://sermhb.cz
+display_url: https://sermhb.cz
 logo_url: /images/logo.svg
 
 collections:

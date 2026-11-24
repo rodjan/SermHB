@@ -4,8 +4,7 @@ title: Tréninky
 
 ## Kde trénujeme
 
-Tréninky probíhají v tělocvičně v **Havlíčkově Brodě**.
-*(Doplňte prosím přesnou adresu v administraci.)*
+Tréninky probíhají v tělocvičně na adrese **Ledečská 3028, Havlíčkův Brod**.
 
 ## Rozpis tréninků
 

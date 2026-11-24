@@ -10,13 +10,10 @@ Oddíl šermu při **TJ Jiskra Havlíčkův Brod**.
 
 **Telefon:** 564 034 723
 
-**E-mail:** [info@serm-havlickuv-brod.cz](mailto:info@serm-havlickuv-brod.cz) *(doplňte skutečný e-mail)*
+**E-mail:** [info@sermhb.cz](mailto:info@sermhb.cz)
 
 ---
 
 ### Vedení oddílu
 
 - **Petr Šimek** – hlavní trenér
-
-> Kontaktní údaje pocházejí z veřejně dostupných zdrojů – prosím ověřte
-> je a doplňte (zejména e-mail) v administraci (sekce **Stránky → Kontakt**).
