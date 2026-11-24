@@ -9,4 +9,4 @@ fotky:
 ---
 
 Fotografie z Mistrovství ČR ve fleretu kategorie U11 v Praze
-(30. 5. 2026). Další fotky můžete přidat v administraci.
+(30. 5. 2026).

@@ -10,9 +10,4 @@ draft: false
 Naši šermíři se zúčastnili **Mistrovství ČR ve fleretu** v kategorii
 **U11** v Praze.
 
-| Umístění | Šermíř/ka | Kategorie |
-| --- | --- | --- |
-| – | *doplňte jméno* | U11 fleret |
-
-*Konkrétní umístění doplňte v administraci (sekce **Výsledky**).
-Rozpis soutěže je ke stažení v sekci [Dokumenty](/dokumenty).*
+Rozpis soutěže je ke stažení v sekci [Dokumenty](/dokumenty).

@@ -18,7 +18,3 @@ na závod doprovodili a podpořili.
 
 Fotky z akce najdete ve [fotogalerii](/galerie), rozpis soutěže je ke
 stažení v sekci [Dokumenty](/dokumenty).
-
-*Tip pro trenéra: konkrétní umístění jednotlivých šermířů můžete doplnit
-sem do článku nebo do sekce [Výsledky](/vysledky) – vše upravíte
-v administraci.*

@@ -10,9 +10,6 @@ Sdružuje děti, mládež i dospělé se zájmem o sportovní šerm. Specializuj
 se na **fleret** – základní šermířskou zbraň, na které se začátečníci
 naučí techniku, práci nohou a šermířské myšlení.
 
-> Údaje o historii vycházejí z veřejně dostupných zdrojů – prosím
-> ověřte a doplňte je v administraci (sekce **Stránky → O klubu**).
-
 ## Co u nás děti získají
 
 - **Pohybové dovednosti** – obratnost, rychlost, koordinaci a kondici.
